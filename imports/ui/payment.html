@@ -1,0 +1,15 @@
+<template name="paymentThumb">
+    <tr>
+        <td>{{month}}</td>
+        <td>{{payer}}</td>
+        <td>{{category}}</td>
+        <td>{{amount}}</td>
+        <td>
+            {{#if currentUser}}
+                <button class="delete delete-button">
+                    <span>Delete this payment</span>
+                </button>
+            {{/if}}
+        </td>
+    </tr>
+</template>
