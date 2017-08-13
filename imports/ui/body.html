@@ -1,4 +1,10 @@
 <body>
+<style>
+        {{#each uniqueYears}}
+            {{> paymentYearsCSS}}
+        {{/each}}
+</style>
+
 <div class="container">
     <header></header>
 
@@ -10,9 +16,29 @@
     </div>
 
     <div class="vertical-align">
+
+        {{#each uniqueYears}}
+            {{> paymentYearsButtons}}
+        {{/each}}
+        <input class="tab" id="charts" type="radio" name="tabs">
+        <label class="tab" for="charts">Charts</label>
+
+        <input class="tab" id="configuration" type="radio" name="tabs">
+        <label class="tab" for="configuration">Configuration</label>
+
+        <section class="tab" id="chartsSection">
+            <p class="tab"></p>
+        </section>
+
+        <section class="tab" id="configurationSection">
+            <p class="tab"></p>
+        </section>
+
+        <!-- //TODO: Payments section -->
         <form class="{{#if currentUser}}new-payment{{/if}}">
             <table>
                 <tr>
+                    <td><h3><span>Year</span></h3></td>
                     <td><h3><span>Month</span></h3></td>
                     <td><h3><span>Payer</span></h3></td>
                     <td><h3><span>Category</span></h3></td>
@@ -21,6 +47,7 @@
                 </tr>
                 {{#if currentUser}}
                     <tr>
+                        <td><input class="" name="year" placeholder="Year of the payment"/></td>
                         <td><input class="" name="month" placeholder="Month of the payment"/></td>
                         <td><input class="" name="payer" placeholder="Name of the payer"/></td>
                         <td><input class="" name="category" placeholder="Category of the payment"/></td>
@@ -31,7 +58,7 @@
                 {{/if}}
 
                 {{#each payments}}
-                    {{> paymentThumb}}
+                    {{> payment}}
                 {{/each}}
             </table>
         </form>

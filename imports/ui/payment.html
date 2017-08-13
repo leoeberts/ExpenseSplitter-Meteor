@@ -1,5 +1,6 @@
-<template name="paymentThumb">
+<template name="payment">
     <tr>
+        <td>{{year}}</td>
         <td>{{month}}</td>
         <td>{{payer}}</td>
         <td>{{category}}</td>
@@ -12,4 +13,15 @@
             {{/if}}
         </td>
     </tr>
+</template>
+
+<template name="paymentYearsButtons">
+    <label class="show-year" for="{{year}}">
+        {{year}}
+        <input class="tab" id="{{year}}" type="radio" name="tabs" checked>
+    </label>
+</template>
+
+<template name="paymentYearsCSS">
+    <!-- //TODO: CSS para payments section -->
 </template>

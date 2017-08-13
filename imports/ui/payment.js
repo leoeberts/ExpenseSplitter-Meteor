@@ -3,7 +3,7 @@ import {Meteor} from 'meteor/meteor';
 
 import './payment.html';
 
-Template.paymentThumb.events({
+Template.payment.events({
     'click .delete'() {
         Meteor.call('payments.remove', this._id);
     },
