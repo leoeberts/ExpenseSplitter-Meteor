@@ -20,6 +20,11 @@
         {{#each uniqueYears}}
             {{> paymentYearsButtons}}
         {{/each}}
+
+        {{#each uniqueMonths}}
+            {{> paymentMonthButtons}}
+        {{/each}}
+
         <input class="tab" id="charts" type="radio" name="tabs">
         <label class="tab" for="charts">Charts</label>
 
@@ -31,6 +36,10 @@
         </section>
 
         <section class="tab" id="configurationSection">
+            <p class="tab"></p>
+        </section>
+
+        <section class="tab" id="Section2016">
             <p class="tab"></p>
         </section>
 
@@ -51,7 +60,7 @@
                         <td><input class="" name="month" placeholder="Month of the payment"/></td>
                         <td><input class="" name="payer" placeholder="Name of the payer"/></td>
                         <td><input class="" name="category" placeholder="Category of the payment"/></td>
-                        <td><input class="" name="amount" type="number" placeholder="Amount payed"/></td>
+                        <td><input class="" name="amount" type="number" step="any" placeholder="Amount payed"/></td>
                         <td></td>
                         <input type="submit" style="visibility: hidden">
                     </tr>
@@ -61,6 +70,10 @@
                     {{> payment}}
                 {{/each}}
             </table>
+
+            {{#each amountPayedPerMonth}}
+                <div>{{payer}} - {{month}}/{{year}}: {{amount}}</div>
+            {{/each}}
         </form>
     </div>
 </div>

@@ -19,8 +19,7 @@ Meteor.methods({
         checkStringNotEmpty(month);
         checkStringNotEmpty(payer);
         checkStringNotEmpty(category);
-        //TODO: validade amount
-        //check(amount, Number);
+        check(amount, Number);
 
         Payments.insert({
             year: year,
@@ -34,14 +33,18 @@ Meteor.methods({
         });
 
         Meteor.call('years.insert', year);
+        Meteor.call('month.insert', year, month);
+        Meteor.call('amountPayedPerMonth.insert', year, month, payer, amount);
     },
     'payments.remove'(paymentId) {
         check(paymentId, String);
         checkAuthorization(paymentId, this.userId);
 
-        const paymentRemoved = Payments.findOne({_id: paymentId});
+        const payment = Payments.findOne({_id: paymentId});
         Payments.remove(paymentId);
-        Meteor.call('years.remove', paymentRemoved.year);
+        Meteor.call('years.remove', payment.year);
+        Meteor.call('month.remove', payment.year, payment.month);
+        Meteor.call('amountPayedPerMonth.remove', payment.year, payment.month, payment.payer, payment.amount);
     },
 });
 

@@ -27,8 +27,7 @@ Meteor.methods({
         check(year, String);
 
         if (!isYearPresentInPayments(year)) {
-            const registeredYear = Years.findOne({year: year});
-            Years.remove(registeredYear._id);
+            Years.remove({year: year});
         }
     },
 });
