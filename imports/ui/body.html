@@ -1,35 +1,78 @@
 <body>
-<style>
-        {{#each uniqueYears}}
-            {{> paymentYearsCSS}}
-        {{/each}}
-</style>
-
 <div class="container">
     <header></header>
 
     <div class="header">
-        <h3>Payment gallery
+        <h3>Expense Splitter
             <span>with Meteor</span>
             <span class="login">{{> loginButtons}}</span>
         </h3>
     </div>
 
+    <!-- //TODO: Remove tabs and add lists, for now... -->
     <div class="vertical-align">
-
-        {{#each uniqueYears}}
-            {{> paymentYearsButtons}}
-        {{/each}}
-
-        {{#each uniqueMonths}}
-            {{> paymentMonthButtons}}
-        {{/each}}
+        <input class="tab" id="payments" type="radio" name="tabs">
+        <label class="tab" for="payments">Payments</label>
 
         <input class="tab" id="charts" type="radio" name="tabs">
         <label class="tab" for="charts">Charts</label>
 
         <input class="tab" id="configuration" type="radio" name="tabs">
         <label class="tab" for="configuration">Configuration</label>
+
+        <section class="tab" id="paymentsSection">
+            <div class="filters">
+                <div class="dropdown dropdown-dark">
+                    <select name="year" id="year-filter" class="dropdown-select">
+                        <option hidden disabled selected value>-- select an year --</option>
+                        {{#each uniqueYears}}
+                            {{> paymentYearsOptions}}
+                        {{/each}}
+                    </select>
+                </div>
+
+                <div class="dropdown dropdown-dark">
+                    <select name="month" id="month-filter" class="dropdown-select">
+                        <option hidden disabled selected value>-- select an month --</option>
+                        {{#each uniqueMonths}}
+                            {{> paymentMonthOptions}}
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <!-- //TODO: Payments section -->
+            <form class="{{#if currentUser}}new-payment{{/if}}">
+                <table>
+                    <tr>
+                        <td><h3><span>Year</span></h3></td>
+                        <td><h3><span>Month</span></h3></td>
+                        <td><h3><span>Payer</span></h3></td>
+                        <td><h3><span>Category</span></h3></td>
+                        <td><h3><span>Amount</span></h3></td>
+                        <td></td>
+                    </tr>
+                    {{#if currentUser}}
+                        <tr>
+                            <td><input class="" name="year" placeholder="Year of the payment"/></td>
+                            <td><input class="" name="month" placeholder="Month of the payment"/></td>
+                            <td><input class="" name="payer" placeholder="Name of the payer"/></td>
+                            <td><input class="" name="category" placeholder="Category of the payment"/></td>
+                            <td><input class="" name="amount" type="number" step="any" placeholder="Amount payed"/></td>
+                            <td></td>
+                            <input type="submit" style="visibility: hidden">
+                        </tr>
+                    {{/if}}
+
+                    {{#each payments}}
+                        {{> payment}}
+                    {{/each}}
+                </table>
+
+                {{#each amountPayedPerMonth}}
+                    <div>{{payer}} - {{month}}/{{year}}: {{amount}}</div>
+                {{/each}}
+            </form>
+        </section>
 
         <section class="tab" id="chartsSection">
             <p class="tab"></p>
@@ -38,43 +81,6 @@
         <section class="tab" id="configurationSection">
             <p class="tab"></p>
         </section>
-
-        <section class="tab" id="Section2016">
-            <p class="tab"></p>
-        </section>
-
-        <!-- //TODO: Payments section -->
-        <form class="{{#if currentUser}}new-payment{{/if}}">
-            <table>
-                <tr>
-                    <td><h3><span>Year</span></h3></td>
-                    <td><h3><span>Month</span></h3></td>
-                    <td><h3><span>Payer</span></h3></td>
-                    <td><h3><span>Category</span></h3></td>
-                    <td><h3><span>Amount</span></h3></td>
-                    <td></td>
-                </tr>
-                {{#if currentUser}}
-                    <tr>
-                        <td><input class="" name="year" placeholder="Year of the payment"/></td>
-                        <td><input class="" name="month" placeholder="Month of the payment"/></td>
-                        <td><input class="" name="payer" placeholder="Name of the payer"/></td>
-                        <td><input class="" name="category" placeholder="Category of the payment"/></td>
-                        <td><input class="" name="amount" type="number" step="any" placeholder="Amount payed"/></td>
-                        <td></td>
-                        <input type="submit" style="visibility: hidden">
-                    </tr>
-                {{/if}}
-
-                {{#each payments}}
-                    {{> payment}}
-                {{/each}}
-            </table>
-
-            {{#each amountPayedPerMonth}}
-                <div>{{payer}} - {{month}}/{{year}}: {{amount}}</div>
-            {{/each}}
-        </form>
     </div>
 </div>
 

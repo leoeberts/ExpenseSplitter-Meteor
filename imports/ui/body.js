@@ -20,7 +20,6 @@ Template.body.helpers({
     payments() {
         let yearToShow = Template.instance().state.get('yearToShow');
         let monthToShow = Template.instance().state.get('monthToShow');
-        console.log(monthToShow);
         if (monthToShow && monthToShow.length > 0) {
             return Payments.find({year: yearToShow, month: monthToShow}, {sort: {createdAt: 1}});
         }
@@ -35,9 +34,6 @@ Template.body.helpers({
             return Payments.find({year: new Date().getFullYear().toString()}, {sort: {createdAt: 1}});
         }
     },
-    uniqueYears() {
-        return Years.find({}, {sort: {year: 1}});
-    },
     amountPayedPerMonth() {
         let yearToShow = Template.instance().state.get('yearToShow');
         let monthToShow = Template.instance().state.get('monthToShow');
@@ -45,6 +41,9 @@ Template.body.helpers({
             return Payments.find({year: yearToShow, month: monthToShow}, {sort: {createdAt: 1}});
         }
         return Payments.find({year: yearToShow}, {sort: {createdAt: 1}});
+    },
+    uniqueYears() {
+        return Years.find({}, {sort: {year: -1}});
     },
     uniqueMonths() {
         let yearToShow = Template.instance().state.get('yearToShow');
@@ -70,11 +69,14 @@ Template.body.events({
         target.category.value = '';
         target.amount.value = '';
     },
-    'change .show-year input'(event, instance) {
-        instance.state.set('yearToShow', event.target.id);
+    'change #year-filter'(event, instance) {
+        instance.state.set('yearToShow', event.target.value);
     },
-    'change .show-month input'(event, instance) {
-        console.log(event.target.id);
-        instance.state.set('monthToShow', event.target.id);
+    'change #month-filter'(event, instance) {
+        instance.state.set('monthToShow', event.target.value);
+    },
+    'click .show-year'(event, instance) {
+        //TODO: Click event for future tabs
+        instance.state.set('yearToShow', event.target.id);
     },
 });
