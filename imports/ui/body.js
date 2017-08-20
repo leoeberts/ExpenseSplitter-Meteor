@@ -49,6 +49,14 @@ Template.body.helpers({
         let yearToShow = Template.instance().state.get('yearToShow');
         return Month.find({year: yearToShow}, {sort: {year: 1}});
     },
+    actualYear() {
+        return new Date().getFullYear();
+    },
+    actualMonth() {
+        let month = new Date().toLocaleString("pt-br", {month: "long"});
+        //TODO: Underscore not working (_.capitalize)
+        return month.charAt(0).toUpperCase() + month.slice(1);
+    }
 });
 
 Template.body.events({

@@ -53,8 +53,10 @@
                     </tr>
                     {{#if currentUser}}
                         <tr>
-                            <td><input class="" name="year" placeholder="Year of the payment"/></td>
-                            <td><input class="" name="month" placeholder="Month of the payment"/></td>
+                            <td><input class="" name="year" placeholder="Year of the payment" value="{{actualYear}}"/>
+                            </td>
+                            <td><input class="" name="month" placeholder="Month of the payment"
+                                       value="{{actualMonth}}"/></td>
                             <td><input class="" name="payer" placeholder="Name of the payer"/></td>
                             <td><input class="" name="category" placeholder="Category of the payment"/></td>
                             <td><input class="" name="amount" type="number" step="any" placeholder="Amount payed"/></td>
