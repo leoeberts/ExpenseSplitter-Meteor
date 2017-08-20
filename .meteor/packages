@@ -25,3 +25,4 @@ practicalmeteor:mocha
 monbro:mongodb-mapreduce-aggregation
 jcbernack:reactive-aggregate
 underscore
+mizzao:autocomplete

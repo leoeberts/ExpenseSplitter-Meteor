@@ -3,14 +3,17 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 
 import {Payments} from "../api/payments.js";
 import {Years} from "../api/years.js";
-import {Month} from "../api/month.js";
+import {Months} from "../api/months.js";
 
 import './body.html';
 import './payment.js';
 
 Template.body.onCreated(function bodyOnCreated() {
     this.state = new ReactiveDict();
+    Meteor.subscribe('settings');
     Meteor.subscribe('payments');
+    Meteor.subscribe('payers');
+    Meteor.subscribe('categories');
     Meteor.subscribe('uniqueYears');
     Meteor.subscribe('uniqueMonths');
     Meteor.subscribe('amountPayedPerMonth');
@@ -47,15 +50,13 @@ Template.body.helpers({
     },
     uniqueMonths() {
         let yearToShow = Template.instance().state.get('yearToShow');
-        return Month.find({year: yearToShow}, {sort: {year: 1}});
+        return Months.find({year: yearToShow}, {sort: {year: 1}});
     },
     actualYear() {
-        return new Date().getFullYear();
+        return getActualYear();
     },
     actualMonth() {
-        let month = new Date().toLocaleString("pt-br", {month: "long"});
-        //TODO: Underscore not working (_.capitalize)
-        return month.charAt(0).toUpperCase() + month.slice(1);
+        return getActualMonth();
     }
 });
 
@@ -71,8 +72,7 @@ Template.body.events({
             target.category.value,
             Number(target.amount.value));
 
-        target.year.value = '';
-        target.month.value = '';
+        //TODO: Should month and year be reset?
         target.payer.value = '';
         target.category.value = '';
         target.amount.value = '';
@@ -88,3 +88,13 @@ Template.body.events({
         instance.state.set('yearToShow', event.target.id);
     },
 });
+
+function getActualYear() {
+    return new Date().getFullYear();
+}
+
+function getActualMonth() {
+    let month = new Date().toLocaleString("pt-br", {month: "long"});
+    //TODO: Underscore not working (_.capitalize)
+    return month.charAt(0).toUpperCase() + month.slice(1);
+}

@@ -33,7 +33,9 @@ Meteor.methods({
         });
 
         Meteor.call('years.insert', year);
-        Meteor.call('month.insert', year, month);
+        Meteor.call('months.insert', year, month);
+        Meteor.call('payers.insert', payer);
+        Meteor.call('categories.insert', category);
         Meteor.call('amountPayedPerMonth.insert', year, month, payer, amount);
     },
     'payments.remove'(paymentId) {
@@ -43,7 +45,9 @@ Meteor.methods({
         const payment = Payments.findOne({_id: paymentId});
         Payments.remove(paymentId);
         Meteor.call('years.remove', payment.year);
-        Meteor.call('month.remove', payment.year, payment.month);
+        Meteor.call('months.remove', payment.year, payment.month);
+        Meteor.call('payers.remove', payment.payer);
+        Meteor.call('categories.remove', payment.category);
         Meteor.call('amountPayedPerMonth.remove', payment.year, payment.month, payment.payer, payment.amount);
     },
 });

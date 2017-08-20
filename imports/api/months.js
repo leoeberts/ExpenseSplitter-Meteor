@@ -3,34 +3,34 @@ import {Mongo} from 'meteor/mongo';
 import {check} from 'meteor/check';
 import {Payments} from "./payments.js";
 
-export const Month = new Mongo.Collection('month');
+export const Months = new Mongo.Collection('months');
 
 if (Meteor.isServer) {
     Meteor.publish('uniqueMonths', function uniqueMonthsPublication() {
-        return Month.find({});
+        return Months.find({});
     });
 }
 
 Meteor.methods({
-    'month.insert'(year, month) {
+    'months.insert'(year, month) {
         checkUserLoggedIn(this.userId);
         //TODO: validade year
         checkStringNotEmpty(year);
         checkStringNotEmpty(month);
 
         if (!isYearAlreadyRegistered(year, month)) {
-            Month.insert({
+            Months.insert({
                 year: year,
                 month: month,
             });
         }
     },
-    'month.remove'(year, month) {
+    'months.remove'(year, month) {
         checkStringNotEmpty(year);
         checkStringNotEmpty(month);
 
         if (!isYearPresentInPayments(year, month)) {
-            Month.remove({year: year, month: month});
+            Months.remove({year: year, month: month});
         }
     },
 });
@@ -47,7 +47,7 @@ function checkStringNotEmpty(value) {
 }
 
 function isYearAlreadyRegistered(year, month) {
-    return Month.find({year: year, month: month}).count() > 0;
+    return Months.find({year: year, month: month}).count() > 0;
 }
 
 function isYearPresentInPayments(year, month) {

@@ -1,3 +1,19 @@
+<template name="payerInput">
+    {{> inputAutocomplete settings=settings id="payer" class="new-payment form-control" name="payer" placeholder="Name of the payer" }}
+</template>
+
+<template name="standardPayers">
+    {{payer}}
+</template>
+
+<template name="categoryInput">
+    {{> inputAutocomplete settings=settings id="category" class="new-payment form-control" name="category" placeholder="Category" }}
+</template>
+
+<template name="uniqueCategories">
+    {{category}}
+</template>
+
 <template name="payment">
     <tr>
         <td>{{year}}</td>
