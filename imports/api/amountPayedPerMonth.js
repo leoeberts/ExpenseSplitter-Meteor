@@ -14,7 +14,7 @@ if (Meteor.isServer) {
 Meteor.methods({
     'amountPayedPerMonth.insert'(year, month, payer, amount) {
         checkUserLoggedIn(this.userId);
-        //TODO: validade year
+        //TODO: validate year
         checkStringNotEmpty(year);
         checkStringNotEmpty(month);
         checkStringNotEmpty(payer);
@@ -33,7 +33,7 @@ Meteor.methods({
     },
     'amountPayedPerMonth.remove'(year, month, payer, amount) {
         checkUserLoggedIn(this.userId);
-        //TODO: validade year
+        //TODO: validate year
         checkStringNotEmpty(year);
         checkStringNotEmpty(month);
         checkStringNotEmpty(payer);

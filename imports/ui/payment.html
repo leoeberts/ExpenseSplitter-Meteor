@@ -1,5 +1,5 @@
 <template name="payerInput">
-    {{> inputAutocomplete settings=settings id="payer" class="new-payment form-control" name="payer" placeholder="Name of the payer" }}
+    {{> inputAutocomplete settings=settings id="payer" autofocus="autofocus" class="new-payment form-control" name="payer" placeholder="Name of the payer" }}
 </template>
 
 <template name="standardPayers">
@@ -32,7 +32,7 @@
 </template>
 
 <template name="paymentYearsOptions">
-    <option value="{{yer}}">{{year}}</option>
+    <option value="{{year}}">{{year}}</option>
 </template>
 
 <template name="paymentMonthOptions">

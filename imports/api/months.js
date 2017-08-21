@@ -14,7 +14,7 @@ if (Meteor.isServer) {
 Meteor.methods({
     'months.insert'(year, month) {
         checkUserLoggedIn(this.userId);
-        //TODO: validade year
+        //TODO: validate year
         checkStringNotEmpty(year);
         checkStringNotEmpty(month);
 

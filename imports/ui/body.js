@@ -72,20 +72,23 @@ Template.body.events({
             target.category.value,
             Number(target.amount.value));
 
-        //TODO: Should month and year be reset?
         target.payer.value = '';
         target.category.value = '';
         target.amount.value = '';
+
+        //TODO: Focus from amount to payer by JS?
+        /*Template.yourTemplate.rendered = function(){
+            var input = this.find('#payer');
+            if(input){
+                input.focus();
+            }
+        }*/
     },
     'change #year-filter'(event, instance) {
         instance.state.set('yearToShow', event.target.value);
     },
     'change #month-filter'(event, instance) {
         instance.state.set('monthToShow', event.target.value);
-    },
-    'click .show-year'(event, instance) {
-        //TODO: Click event for future tabs
-        instance.state.set('yearToShow', event.target.id);
     },
 });
 

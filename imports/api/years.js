@@ -14,7 +14,7 @@ if (Meteor.isServer) {
 Meteor.methods({
     'years.insert'(year) {
         checkUserLoggedIn(this.userId);
-        //TODO: validade year
+        //TODO: validate year
         checkStringNotEmpty(year);
 
         if (!isYearAlreadyRegistered(year)) {

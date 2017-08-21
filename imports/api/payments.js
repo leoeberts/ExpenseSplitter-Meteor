@@ -13,9 +13,9 @@ if (Meteor.isServer) {
 Meteor.methods({
     'payments.insert'(year, month, payer, category, amount) {
         checkUserLoggedIn(this.userId);
-        //TODO: validade year
+        //TODO: validate year
         checkStringNotEmpty(year);
-        //TODO: validade month
+        //TODO: validate month
         checkStringNotEmpty(month);
         checkStringNotEmpty(payer);
         checkStringNotEmpty(category);
